@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">Confirm Deletion</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <p *ngIf="patient && patient.name">Are you sure you want to delete the patient: <strong>{{ patient.name }}</strong>?</p>
+    <p *ngIf="!patient || !patient.name">Invalid patient data. Cannot proceed with deletion.</p>
+    <p class="text-danger">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>This action cannot be undone.
+    </p>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">
+      <i class="bi bi-x-circle me-1"></i>Cancel
+    </button>
+    <button type="button" class="btn btn-danger" [disabled]="!patient || !patient.name" (click)="confirmDelete()">
+      <i class="bi bi-trash me-1"></i>Delete
+    </button>
+</div>

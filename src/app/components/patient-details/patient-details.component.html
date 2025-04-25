@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="modal-title">Patient Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="text-center">
+          <img [src]="patient.photoUrl || 'assets/images/default-user.png'" 
+               alt="{{ patient.name }}" 
+               class="img-fluid rounded-circle mb-3" 
+               style="max-width: 150px; max-height: 150px; object-fit: cover;">
+          <h5>{{ patient.name }}</h5>
+          <p class="text-muted">{{ patient.uid }}</p>
+        </div>
+      </div>
+      
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Phone</h6>
+            <p>{{ patient.phone }}</p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Email</h6>
+            <p>{{ patient.email }}</p>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <h6 class="text-muted">Age</h6>
+            <p>{{ patient.age }} years</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h6 class="text-muted">Gender</h6>
+            <p>{{ patient.gender }}</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h6 class="text-muted">Blood Group</h6>
+            <p>{{ patient.bloodGroup }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12 mb-3">
+        <h6 class="text-muted">Address</h6>
+        <p>{{ patient.address }}</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12 mb-3">
+        <h6 class="text-muted">Medical History</h6>
+        <p [innerHTML]="patient.medicalHistory || 'No medical history recorded.'"></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <h6 class="text-muted">Registration Date</h6>
+        <p>{{ patient.createdAt | date: 'medium' }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Close</button>
+  </div>
