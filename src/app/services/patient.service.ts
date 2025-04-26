@@ -8,7 +8,7 @@ import { Patient } from '../models/patient';
 })
 export class PatientService {
   // Update this to your deployed backend URL
-  private apiUrl = 'https://skoolwhiz-backend-author-somesh-raj.vercel.app';
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
