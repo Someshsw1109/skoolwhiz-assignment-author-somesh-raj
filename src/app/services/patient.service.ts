@@ -7,7 +7,7 @@ import { Patient } from '../models/patient';
   providedIn: 'root'
 })
 export class PatientService {
-  private apiUrl = 'http://localhost:3000/patients';
+  private apiUrl = 'https://skoolwhiz-backend-author-somesh-raj.vercel.app/patients';
 
   constructor(private http: HttpClient) { }
 
