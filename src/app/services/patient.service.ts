@@ -17,7 +17,7 @@ export class PatientService {
    */
   getAllPatients(): Observable<Patient[]> {
     console.log('Fetching all patients');
-    return this.http.get<Patient[]>(this.apiUrl).pipe(
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients`).pipe(
       map(patients => {
         console.log('Received patients:', patients);
         return patients.filter(patient => patient.id !== undefined && patient.id !== null);
@@ -25,6 +25,7 @@ export class PatientService {
       catchError(this.handleError)
     );
   }
+  
 
   /**
    * Get a patient by ID with error handling
