@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of, switchMap, map, catchError } from 'rxjs';
 import { Patient } from '../models/patient';
-import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
-  private apiUrl = environment.apiUrl;
+  // Update this to your deployed backend URL
+  private apiUrl = 'https://skoolwhiz-backend-author-somesh-raj.vercel.app';
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +26,6 @@ export class PatientService {
     );
   }
   
-
   /**
    * Get a patient by ID with error handling
    */
@@ -37,7 +36,7 @@ export class PatientService {
     }
     
     console.log(`Fetching patient with ID: ${id}`);
-    return this.http.get<Patient>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.get<Patient>(`${this.apiUrl}/patients/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
           console.error(`Patient with ID ${id} not found`);
@@ -74,7 +73,7 @@ export class PatientService {
         console.log('Sending patient with calculated ID:', patientToCreate);
         
         // Send it with our manually calculated ID
-        return this.http.post<Patient>(this.apiUrl, patientToCreate);
+        return this.http.post<Patient>(`${this.apiUrl}/patients`, patientToCreate);
       }),
       catchError(this.handleError)
     );
@@ -91,7 +90,7 @@ export class PatientService {
     
     console.log(`Updating patient with ID: ${id}`, patient);
     
-    return this.http.patch<Patient>(`${this.apiUrl}/${id}`, patient).pipe(
+    return this.http.patch<Patient>(`${this.apiUrl}/patients/${id}`, patient).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
           console.error(`Patient with ID ${id} not found for update`);
@@ -117,7 +116,7 @@ export class PatientService {
     
     console.log(`Deleting patient with ID: ${id}`);
     
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete<void>(`${this.apiUrl}/patients/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
           console.error(`Patient with ID ${id} not found for deletion`);
@@ -142,7 +141,7 @@ export class PatientService {
     
     console.log(`Searching patients with query: ${query}`);
     
-    return this.http.get<Patient[]>(`${this.apiUrl}?q=${query}`).pipe(
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients?q=${query}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -157,7 +156,7 @@ export class PatientService {
     
     console.log(`Filtering patients by blood group: ${bloodGroup}`);
     
-    return this.http.get<Patient[]>(`${this.apiUrl}?bloodGroup=${bloodGroup}`).pipe(
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients?bloodGroup=${bloodGroup}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -172,7 +171,7 @@ export class PatientService {
     
     console.log(`Checking if UID exists: ${uid}`);
     
-    return this.http.get<Patient[]>(`${this.apiUrl}?uid=${uid}`).pipe(
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients?uid=${uid}`).pipe(
       catchError(this.handleError)
     );
   }
